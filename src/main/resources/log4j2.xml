@@ -17,9 +17,9 @@
             </Policies>
             <DefaultRolloverStrategy>
                 <Delete basePath="${LOG_DIR}" maxDepth="2">
-                    <testMode>true</testMode>
-                    <IfFileName glob="*.log">
-<!--                        <IfLastModified age="P2D"/>-->
+<!--                    <testMode>true</testMode>-->
+                    <IfFileName glob="hippodrome.*.log">
+                        <IfLastModified age="1D"/>
                     </IfFileName>
                 </Delete>
             </DefaultRolloverStrategy>
