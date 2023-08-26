@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockitoExtension.class)
 class HorseTest {
     @Test
-    void whenConstructorNull() {
+    void whenConstructorNullThrowIllegalArgumentException() {
         Throwable exception = assertThrows(
                 IllegalArgumentException.class, () -> new Horse(null, 20.0, 12.0));
         assertEquals("Name cannot be null.", exception.getMessage());
@@ -20,19 +20,19 @@ class HorseTest {
 
     @ParameterizedTest
     @ValueSource(strings = {" ", "   ", "    "})
-    void whenNameIsEmpty(String str) {
+    void whenNameIsEmptyThrowIllegalArgumentException(String str) {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Horse(str, 20.0, 12.0));
         assertEquals("Name cannot be blank.", exception.getMessage());
     }
 
     @Test
-    void whenSpeedIsNegative() {
+    void whenSpeedIsNegativeThrowIllegalArgumentException() {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Horse("Horse", -1.0, 12.0));
         assertEquals("Speed cannot be negative.", exception.getMessage());
     }
 
     @Test
-    void whenDistanseIsNegative() {
+    void whenDistanseIsNegativeThrowIllegalArgumentException() {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Horse("Horse", 12, -1));
         assertEquals("Distance cannot be negative.", exception.getMessage());
 
@@ -41,17 +41,17 @@ class HorseTest {
     Horse horse = new Horse("horse", 12, 20);
 
     @Test
-    void CheckgetName() {
+    void CheckMethodGetName() {
         assertEquals("horse", horse.getName());
     }
 
     @Test
-    void CheckGetSpeed() {
+    void CheckMethodGetSpeed() {
         assertEquals(12, horse.getSpeed());
     }
 
     @Test
-    void CheckGetDistance() {
+    void CheckMethodGetDistance() {
         assertEquals(20, horse.getDistance());
     }
 

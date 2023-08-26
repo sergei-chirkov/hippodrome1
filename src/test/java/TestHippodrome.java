@@ -15,7 +15,7 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 class TestHippodrome {
 
     @Test
-    void whenConstructorIsNull() {
+    void whenConstructorIsNullThrowIllegalArgumentException() {
         Throwable exception = assertThrows(
                 IllegalArgumentException.class, () -> new Hippodrome(null));
         assertEquals("Horses cannot be null.", exception.getMessage());
