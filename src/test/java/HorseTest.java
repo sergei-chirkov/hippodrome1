@@ -12,36 +12,28 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockitoExtension.class)
 class HorseTest {
     @Test
-    void whenConstructurNull() {
+    void whenConstructorNull() {
         Throwable exception = assertThrows(
-                IllegalArgumentException.class, () -> {
-                    new Horse(null, 20.0, 12.0);
-                });
+                IllegalArgumentException.class, () -> new Horse(null, 20.0, 12.0));
         assertEquals("Name cannot be null.", exception.getMessage());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {" ", "   ", "    "})
     void whenNameIsEmpty(String str) {
-        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Horse(str, 20.0, 12.0);
-        });
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Horse(str, 20.0, 12.0));
         assertEquals("Name cannot be blank.", exception.getMessage());
     }
 
     @Test
     void whenSpeedIsNegative() {
-        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Horse("Horse", -1.0, 12.0);
-        });
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Horse("Horse", -1.0, 12.0));
         assertEquals("Speed cannot be negative.", exception.getMessage());
     }
 
     @Test
     void whenDistanseIsNegative() {
-        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Horse("Horse", 12, -1);
-        });
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Horse("Horse", 12, -1));
         assertEquals("Distance cannot be negative.", exception.getMessage());
 
     }
@@ -66,7 +58,7 @@ class HorseTest {
     @Test
     void checkCallMethodGetRandomDouble() {
         try (MockedStatic<Horse> mockedStatic = Mockito.mockStatic(Horse.class)) {
-            double randomDouble = Horse.getRandomDouble(0.2, 0.9);
+            Horse.getRandomDouble(0.2, 0.9);
             mockedStatic.verify(() -> Horse.getRandomDouble(0.2, 0.9));
         }
     }
@@ -75,7 +67,7 @@ class HorseTest {
     void checkWorkMethodMove() {
         try(MockedStatic mockedStatic = Mockito.mockStatic(Horse.class)){
             Mockito.when(Horse.getRandomDouble(0.2, 0.9)).thenReturn(1.0);
-            short result = (short) (horse.getDistance() * horse.getSpeed() * 1.0);
+            short result = (short) (horse.getDistance() + horse.getSpeed());
             assertEquals(result,horse.move());
         }
 

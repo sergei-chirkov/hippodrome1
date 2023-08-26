@@ -53,7 +53,7 @@ public class Horse {
 
     public short move() {
         distance += speed * getRandomDouble(0.2, 0.9);
-        return 0;
+        return (short) distance;
     }
 
     public static double getRandomDouble(double min, double max) {

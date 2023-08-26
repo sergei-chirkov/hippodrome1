@@ -1,12 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -14,18 +10,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
-class HippodromeTest {
+class TestHippodrome {
 
     @Test
-    void whenConstructurNull() {
+    void whenConstructorIsNull() {
         Throwable exception = assertThrows(
                 IllegalArgumentException.class, () -> new Hippodrome(null));
         assertEquals("Horses cannot be null.", exception.getMessage());
     }
 
     @Test
-    void whenListHorseIsEmpty() {
+    void checkConstructorWhenListHorseIsEmpty() {
         List<Horse> horses = new ArrayList<>();
         Throwable exception = assertThrows(IllegalArgumentException.class, () ->
                 new Hippodrome(horses));
@@ -45,33 +42,31 @@ class HippodromeTest {
     }
 
     @Test
-    void CheckGetHorses() {
+    void CheckMethodGetHorses() {
 
         Hippodrome hippodrome = new Hippodrome(horseList);
         assertEquals(horseList, hippodrome.getHorses());
     }
 
-    //    @ExtendWith(MockitoExtension.class)
+    @ExtendWith(MockitoExtension.class)
     @Mock
     Horse horse;
 
     @Test
-    void CheckMove() {
+    void CheckMethodMove() {
         List<Horse> horses = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             horses.add(horse);
         }
         Hippodrome hippodrome = new Hippodrome(horses);
-//        Mockito.verify(hippodrome).move();
-//        hippodrome.move();
-//        hippodrome.move();
-//        Mockito.verify(horse).move();
-
+        hippodrome.move();
+        Mockito.verify(horse, times(50)).move();
     }
+
     @Test
-    void CheckMaxDistance(){
+    void MethodGetWinnerMustGetMaxDistance() {
         Hippodrome hippodrome = new Hippodrome(horseList);
-        assertEquals(hippodrome.getWinner().getDistance(),12);
+        assertEquals(hippodrome.getWinner().getDistance(), 12);
     }
 
 }
