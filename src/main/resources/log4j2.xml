@@ -16,10 +16,9 @@
                 <TimeBasedTriggeringPolicy/>
             </Policies>
             <DefaultRolloverStrategy>
-                <Delete basePath="${LOG_DIR}" maxDepth="2">
-<!--                    <testMode>true</testMode>-->
+                <Delete basePath="${LOG_DIR}">
                     <IfFileName glob="hippodrome.*.log">
-                        <IfLastModified age="1D"/>
+                        <IfLastModified age="P7D"/>
                     </IfFileName>
                 </Delete>
             </DefaultRolloverStrategy>
